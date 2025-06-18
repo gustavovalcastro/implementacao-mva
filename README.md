@@ -16,6 +16,6 @@ java bin/Main
 ```
 ---
 # Autores
-Gustavo Valadares Castro
-Samuel Vieira Lobo Chiodi
-Maicon Gomes Messias
+- Gustavo Valadares Castro
+- Samuel Vieira Lobo Chiodi
+- Maicon Gomes Messias
