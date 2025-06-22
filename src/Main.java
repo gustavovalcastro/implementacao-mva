@@ -85,15 +85,10 @@ public class Main {
 		// Objeto para armazenar tempos de resposta
 		TempoMedioResposta r = new TempoMedioResposta();
 
-		// Loop principal do MVA: itera de 1 até N clientes
 		for (int clientes = 1; clientes <= config.numClientes; clientes++) {
-			// 1. Calcula tempo de resposta baseado no estado anterior
 			r = getTempoRespostaSistema(config.si, ni, config.vi);
-			// 2. Calcula throughput do sistema usando Lei de Little
 			x0 = getThroughputSistema(clientes, r.getR0());
-			// 3. Calcula throughput de cada dispositivo
 			xi = getThroughputDispositivos(config.vi, x0);
-			// 4. Atualiza número médio de clientes em cada dispositivo
 			ni = getNumeroMedioClientesDispositos(r.getRi(), xi);
 		}
 
@@ -120,7 +115,6 @@ public class Main {
 		System.out.println("--------------------------------------------------");
 		System.out.printf("- Tempo médio de resposta total (R) = %.2f\n", resultados.r);
 
-		// Exibe métricas individuais para cada dispositivo
 		for (int i = 0; i < resultados.w.length; i++) {
 			System.out.printf("\nDispositivo #%d\n", i + 1);
 			System.out.printf("- Tempo médio de espera (W) = %.2f\n", resultados.w[i]);
@@ -131,7 +125,6 @@ public class Main {
         System.out.println("\n--------------------------------------------------");
 		System.out.println("Resultados do Sistema:");
         System.out.println("--------------------------------------------------");
-		// Exibe métricas agregadas do sistema completo
 		System.out.printf("- Tempo médio de espera do sistema (W) = %.2f\n", resultados.wSistema);
 		System.out.printf("- Utilização total do servidor (U) = %.2f\n", resultados.uSistema);
 		System.out.printf("- Número médio de clientes no sistema (L) = %.2f\n", resultados.nSistema);
@@ -333,9 +326,6 @@ class TempoMedioResposta {
 	private double[] ri;  // Tempos de resposta individuais por dispositivo
 	private double r0;    // Tempo de resposta total do sistema
 
-	/**
-	 * Construtor padrão (vazio)
-	 */
 	TempoMedioResposta() {
 	}
 	
@@ -347,7 +337,6 @@ class TempoMedioResposta {
 	 */
 	TempoMedioResposta(double[] ri, int[] vi) {
 		this.ri = ri;
-		// Calcula R0 como soma ponderada dos tempos individuais
 		for (int i = 0; i < ri.length; i++) {
 			this.r0 += vi[i] * ri[i];
 		}
