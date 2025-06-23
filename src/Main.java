@@ -43,17 +43,19 @@ public class Main {
 		System.out.print("Número de filas (recursos): ");
 		int numRecursos = scanner.nextInt();
 		
-		// Arrays para armazenar taxas de visita e tempos de serviço
-		int[] vi = new int[numRecursos];
+		// Arrays para armazenar taxas de visita e taxas de serviço
+		//int[] vi = new double[numRecursos];
+	    double[] vi = new double[numRecursos];
 		double[] si = new double[numRecursos];
 
 		// Coleta as taxas de visita para cada recurso
 		for (int i = 0; i < numRecursos; i++) {
 			System.out.printf("Taxa de chegada do recurso %d: ", i + 1);
-			vi[i] = scanner.nextInt();
+			//vi[i] = scanner.nextInt();
+			vi[i] = scanner.nextDouble();
 		}
 
-		// Coleta os tempos de serviço para cada recurso
+		// Coleta as taxas de serviço para cada recurso
 		for (int i = 0; i < numRecursos; i++) {
 			System.out.printf("Taxa de serviço do recurso %d: ", i + 1);
 			si[i] = scanner.nextDouble();
@@ -138,7 +140,7 @@ public class Main {
 	 * @param vi array com taxas de visita de cada dispositivo
 	 * @return objeto TempoMedioResposta contendo Ri e R0
 	 */
-	static TempoMedioResposta getTempoRespostaSistema(double[] si, double[] ni, int[] vi) {
+	static TempoMedioResposta getTempoRespostaSistema(double[] si, double[] ni, double[] vi) {
 		double[] ri = new double[si.length];
 		// Aplica a fórmula do MVA para cada dispositivo
 		for (int i = 0; i < si.length; i++) {
@@ -165,7 +167,7 @@ public class Main {
 	 * @param x0 throughput do sistema
 	 * @return array com throughput de cada dispositivo
 	 */
-	static double[] getThroughputDispositivos(int[] vi, double x0) {
+	static double[] getThroughputDispositivos(double[] vi, double x0) {
 		double[] xi = new double[vi.length];
 		for (int i = 0; i < vi.length; i++) {
 			xi[i] = vi[i] * x0;
@@ -269,7 +271,7 @@ public class Main {
  */
 class Config {
 	int numRecursos;    // Número de dispositivos/recursos no sistema
-	int[] vi;           // Array com taxas de visita de cada recurso
+	double[] vi;           // Array com taxas de visita de cada recurso
 	double[] si;        // Array com tempos de serviço de cada recurso
 	int numClientes;    // Número total de clientes no sistema fechado
 
@@ -280,7 +282,7 @@ class Config {
 	 * @param si array com tempos de serviço
 	 * @param numClientes número de clientes no sistema
 	 */
-	Config(int numRecursos, int[] vi, double[] si, int numClientes) {
+	Config(int numRecursos, double[] vi, double[] si, int numClientes) {
 		this.numRecursos = numRecursos;
 		this.vi = vi;
 		this.si = si;
@@ -335,7 +337,7 @@ class TempoMedioResposta {
 	 * @param ri array com tempos de resposta individuais
 	 * @param vi array com taxas de visita (pesos)
 	 */
-	TempoMedioResposta(double[] ri, int[] vi) {
+	TempoMedioResposta(double[] ri, double[] vi) {
 		this.ri = ri;
 		for (int i = 0; i < ri.length; i++) {
 			this.r0 += vi[i] * ri[i];
