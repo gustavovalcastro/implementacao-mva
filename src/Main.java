@@ -44,14 +44,12 @@ public class Main {
 		int numRecursos = scanner.nextInt();
 		
 		// Arrays para armazenar taxas de visita e taxas de serviço
-		//int[] vi = new double[numRecursos];
 	    double[] vi = new double[numRecursos];
 		double[] si = new double[numRecursos];
 
 		// Coleta as taxas de visita para cada recurso
 		for (int i = 0; i < numRecursos; i++) {
 			System.out.printf("Taxa de chegada do recurso %d: ", i + 1);
-			//vi[i] = scanner.nextInt();
 			vi[i] = scanner.nextDouble();
 		}
 
